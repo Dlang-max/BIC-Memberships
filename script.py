@@ -50,7 +50,9 @@ ORDER BY
 # Execute the query
 cursor.execute(query)
 
-# Update the Google Sheet
+# Update the Google Sheet:
+# Using pandas DataFrame instead of repeatedly querying and updating
+# Google Sheet. Want to avoid getting rate limited.
 df = pd.DataFrame(columns=["First Name", "Last Name", "Status"])
 for idx, (user_id, first_name, last_name, status) in enumerate(cursor):
     df.loc[len(df)] = [first_name, last_name, status]
