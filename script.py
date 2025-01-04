@@ -24,6 +24,8 @@ client = gspread.authorize(creds)
 sheet = client.open('Buffalo Irish Center Active Members')
 sheet = sheet.worksheet('Active Members')
 
+# The cursor allows use to process information from the mySQL database one
+# row at a time. 
 cursor = database_connection.cursor()
 
 # SQL query to get the first and last name of users with active subscriptions
