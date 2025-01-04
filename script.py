@@ -61,4 +61,5 @@ for idx, (user_id, first_name, last_name, status) in enumerate(cursor):
     print(f"{first_name} {last_name} -> {status}")
 sheet.update([df.columns.values.tolist()] + df.values.tolist())
 
+cursor.close()
 database_connection.close()
