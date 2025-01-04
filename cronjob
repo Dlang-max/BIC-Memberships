@@ -1,0 +1,1 @@
+* * * * * cd /app && . ./.env && /usr/local/bin/python script.py >> /var/log/cron.log 2>&1

@@ -1,0 +1,10 @@
+services:
+  server:
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      - TZ=America/New_York
+    ports:
+      - 8000:8000
