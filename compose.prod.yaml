@@ -1,0 +1,9 @@
+services:
+  server:
+    image: 194139654926.dkr.ecr.us-east-2.amazonaws.com/bic-membership:server
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      - TZ=America/New_York
