@@ -37,7 +37,6 @@ SELECT
     users.user_email AS email,
     CONCAT_WS(', ', 
         meta_address_one.meta_value, 
-        meta_address_two.meta_value, 
         meta_address_city.meta_value, 
         meta_address_state.meta_value, 
         meta_address_zip.meta_value, 
@@ -58,9 +57,6 @@ INNER JOIN
 LEFT JOIN 
     jqo_usermeta AS meta_address_one 
     ON subs.user_id = meta_address_one.user_id AND meta_address_one.meta_key = 'mepr-address-one'
-LEFT JOIN 
-    jqo_usermeta AS meta_address_two 
-    ON subs.user_id = meta_address_two.user_id AND meta_address_two.meta_key = 'mepr-address-two'
 LEFT JOIN 
     jqo_usermeta AS meta_address_city 
     ON subs.user_id = meta_address_city.user_id AND meta_address_city.meta_key = 'mepr-address-city'
