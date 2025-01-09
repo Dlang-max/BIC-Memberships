@@ -34,14 +34,12 @@ SELECT
     users.ID AS user_id,
     meta_first.meta_value AS first_name,
     meta_last.meta_value AS last_name,
-    users.user_email AS email,
-    CONCAT_WS(', ', 
-        meta_address_one.meta_value, 
-        meta_address_city.meta_value, 
-        meta_address_state.meta_value, 
-        meta_address_zip.meta_value, 
-        meta_address_country.meta_value
-    ) AS full_address,
+    users.user_email AS email, 
+    meta_address_one.meta_value AS address, 
+    meta_address_city.meta_value AS city, 
+    meta_address_state.meta_value AS state, 
+    meta_address_zip.meta_value AS zipcode, 
+    meta_address_country.meta_value AS country
     subs.status
 FROM 
     jqo_mepr_subscriptions AS subs
@@ -82,14 +80,14 @@ try:
     cursor.execute(query)
 
     data = []
-    for (_, first_name, last_name, email, address, status) in cursor:
-        print(f"{first_name} {last_name} {email} {address} {status}")
-        data.append([first_name, last_name, email, address, status])
+    for (_, first_name, last_name, email, address, city, state, zipcode, country, status) in cursor:
+        print(f"{first_name} {last_name} {email} {address} {city} {state} {zipcode} {country} {status}")
+        data.append([first_name, last_name, email, address, city, state, zipcode, country, status])
 
     # Update the Google Sheet:
     # Using pandas DataFrame instead of repeatedly querying and updating
     # Google Sheet. Want to avoid getting rate limited.
-    df = pd.DataFrame(data=data, columns=["First Name", "Last Name", "Email", "Address", "Membership Status"])
+    df = pd.DataFrame(data=data, columns=["First Name", "Last Name", "Email", "Address", "City", "State", "Zipcode", "Country" "Membership Status"])
     sheet.clear()
     sheet.update([df.columns.values.tolist()] + df.values.tolist())
 except Exception as e:
